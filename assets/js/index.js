@@ -26,3 +26,28 @@ const sortingBtnRelevantEl = document.querySelector(
 const sortingBtnRecentEl = document.querySelector(".sorting__button--recent");
 const spinnerSearchEl = document.querySelector(".spinner--search");
 const spinnerJobDetailsEl = document.querySelector(".spinner--job-details");
+
+// Search Component
+const submitHandler = (event) => {
+  event.preventDefault();
+
+  const searchText = searchInputEl.value.trim().toLowerCase();
+
+  // check the search input value for any numbers and show error
+  const forbiddenPattern = /[0-9]/;
+  const patternMatch = forbiddenPattern.test(searchText);
+  if (patternMatch) {
+    errorTextEl.textContent = "Your search may not contain numbers!";
+    errorEl.classList.add("error--visible");
+    setTimeout(() => {
+      errorEl.classList.remove("error--visible");
+    }, 3500);
+    return;
+  }
+  searchFormEl.blur();
+
+  // loading
+  spinnerSearchEl.classList.add("spinner--visible");
+};
+
+searchFormEl.addEventListener("submit", submitHandler);
