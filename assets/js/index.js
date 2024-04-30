@@ -109,3 +109,8 @@ const submitHandler = (event) => {
 };
 
 searchFormEl.addEventListener("submit", submitHandler);
+
+// -- JOB LIST COMPONENT --
+const clickHandler = (event) => {};
+
+jobListSearchEl.addEventListener("click", clickHandler);
