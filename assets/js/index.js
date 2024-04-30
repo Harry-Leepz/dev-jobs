@@ -111,6 +111,15 @@ const submitHandler = (event) => {
 searchFormEl.addEventListener("submit", submitHandler);
 
 // -- JOB LIST COMPONENT --
-const clickHandler = (event) => {};
+const clickHandler = (event) => {
+  event.preventDefault();
+
+  // get the clicked element and show visual indicator
+  const jobItemEl = event.target.closest(".job-item");
+  document
+    .querySelector(".job-item--active")
+    ?.classList.remove("job-item--active");
+  jobItemEl.classList.add("job-item--active");
+};
 
 jobListSearchEl.addEventListener("click", clickHandler);
