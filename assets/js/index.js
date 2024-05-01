@@ -120,6 +120,23 @@ const clickHandler = (event) => {
     .querySelector(".job-item--active")
     ?.classList.remove("job-item--active");
   jobItemEl.classList.add("job-item--active");
+
+  // clear job details and show loading element
+  jobDetailsContentEl.innerHTML = "";
+  spinnerJobDetailsEl.classList.add("spinner--visible");
+
+  // get the job item id and make fetch request
+  const jobItemId = jobItemEl.children[0].getAttribute("href");
+  fetch("")
+    .then((response) => {
+      response.json();
+    })
+    .then((data) => {
+      console.log(data);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 };
 
 jobListSearchEl.addEventListener("click", clickHandler);
