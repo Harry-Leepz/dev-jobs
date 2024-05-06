@@ -1,12 +1,12 @@
 import {
   searchInputEl,
-  errorTextEl,
-  errorEl,
   searchFormEl,
   spinnerSearchEl,
   jobListSearchEl,
   numberEl,
 } from "../selectors.js";
+
+import renderError from "./Error.js";
 
 const submitHandler = (event) => {
   event.preventDefault();
@@ -17,11 +17,7 @@ const submitHandler = (event) => {
   const forbiddenPattern = /[0-9]/;
   const patternMatch = forbiddenPattern.test(searchText);
   if (patternMatch) {
-    errorTextEl.textContent = "Your search may not contain numbers!";
-    errorEl.classList.add("error--visible");
-    setTimeout(() => {
-      errorEl.classList.remove("error--visible");
-    }, 3500);
+    renderError("Your search may not contain numbers!");
     return;
   }
   searchFormEl.blur();
