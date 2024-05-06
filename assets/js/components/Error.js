@@ -1,6 +1,6 @@
 import { errorTextEl, errorEl } from "../selectors.js";
 
-const renderError = (message) => {
+const renderError = (message = "Something went wrong") => {
   errorTextEl.textContent = message;
   errorEl.classList.add("error--visible");
   setTimeout(() => {
