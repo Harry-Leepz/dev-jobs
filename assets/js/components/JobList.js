@@ -1,4 +1,8 @@
-import { jobDetailsContentEl, jobListSearchEl } from "../common.js";
+import {
+  BASE_API_URL,
+  jobDetailsContentEl,
+  jobListSearchEl,
+} from "../common.js";
 
 import renderLoading from "./Loading.js";
 
@@ -18,7 +22,7 @@ const clickHandler = (event) => {
 
   // get the job item id and make fetch request
   const jobItemId = jobItemEl.children[0].getAttribute("href");
-  fetch(`https://bytegrad.com/course-assets/js/2/api/jobs?/${jobItemId}`)
+  fetch(`${BASE_API_URL}/jobs?/${jobItemId}`)
     .then((response) => {
       if (!response.ok) {
         console.log("Something went wrong!");
