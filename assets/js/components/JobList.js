@@ -4,6 +4,8 @@ import {
   jobListSearchEl,
 } from "../selectors.js";
 
+import renderLoading from "./Loading.js";
+
 const clickHandler = (event) => {
   event.preventDefault();
 
@@ -16,7 +18,7 @@ const clickHandler = (event) => {
 
   // clear job details and show loading element
   jobDetailsContentEl.innerHTML = "";
-  spinnerJobDetailsEl.classList.add("spinner--visible");
+  renderLoading("job-listing");
 
   // get the job item id and make fetch request
   const jobItemId = jobItemEl.children[0].getAttribute("href");
@@ -30,8 +32,7 @@ const clickHandler = (event) => {
     })
     .then((data) => {
       const { jobItem } = data;
-      console.log(jobItem);
-      spinnerJobDetailsEl.classList.remove("spinner--visible");
+      renderLoading("job-listing");
 
       // render html content
       const htmlContent = `
