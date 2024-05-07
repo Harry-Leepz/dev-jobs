@@ -7,6 +7,7 @@ import {
 } from "../selectors.js";
 
 import renderError from "./Error.js";
+import renderLoading from "./Loading.js";
 
 const submitHandler = (event) => {
   event.preventDefault();
@@ -23,7 +24,7 @@ const submitHandler = (event) => {
   searchFormEl.blur();
 
   // loading
-  spinnerSearchEl.classList.add("spinner--visible");
+  renderLoading("search");
   jobListSearchEl.innerHTML = "";
 
   // fetch data
@@ -40,7 +41,7 @@ const submitHandler = (event) => {
       console.log(jobItems);
 
       // dom update
-      spinnerSearchEl.classList.remove("spinner--visible");
+      renderLoading("search");
       numberEl.textContent = jobItems.length;
 
       jobItems.slice(0, 7).forEach((jobItem) => {
