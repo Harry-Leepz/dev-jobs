@@ -1,7 +1,6 @@
 import {
   searchInputEl,
   searchFormEl,
-  spinnerSearchEl,
   jobListSearchEl,
   numberEl,
 } from "../selectors.js";

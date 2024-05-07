@@ -1,8 +1,4 @@
-import {
-  jobDetailsContentEl,
-  spinnerJobDetailsEl,
-  jobListSearchEl,
-} from "../selectors.js";
+import { jobDetailsContentEl, jobListSearchEl } from "../selectors.js";
 
 import renderLoading from "./Loading.js";
 
