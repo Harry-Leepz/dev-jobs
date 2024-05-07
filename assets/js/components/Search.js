@@ -3,7 +3,7 @@ import {
   searchFormEl,
   jobListSearchEl,
   numberEl,
-} from "../selectors.js";
+} from "../common.js";
 
 import renderError from "./Error.js";
 import renderLoading from "./Loading.js";

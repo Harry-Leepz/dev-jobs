@@ -1,4 +1,4 @@
-import { spinnerSearchEl, spinnerJobDetailsEl } from "../selectors.js";
+import { spinnerSearchEl, spinnerJobDetailsEl } from "../common.js";
 
 const renderLoading = (loadingLocation) => {
   const loadingEl =

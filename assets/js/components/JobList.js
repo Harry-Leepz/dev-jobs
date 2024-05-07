@@ -1,4 +1,4 @@
-import { jobDetailsContentEl, jobListSearchEl } from "../selectors.js";
+import { jobDetailsContentEl, jobListSearchEl } from "../common.js";
 
 import renderLoading from "./Loading.js";
 

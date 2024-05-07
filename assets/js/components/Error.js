@@ -1,4 +1,4 @@
-import { errorTextEl, errorEl } from "../selectors.js";
+import { errorTextEl, errorEl } from "../common.js";
 
 const renderError = (message = "Something went wrong") => {
   errorTextEl.textContent = message;
