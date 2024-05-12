@@ -32,8 +32,7 @@ const submitHandler = (event) => {
   fetch(`${BASE_API_URL}/jobs?search=${searchText}`)
     .then((response) => {
       if (!response.ok) {
-        console.log("Something went wrong!");
-        return;
+        throw new Error("There seems to be a problem with the request!");
       }
       return response.json();
     })
@@ -47,7 +46,8 @@ const submitHandler = (event) => {
       renderJobList(jobItems);
     })
     .catch((error) => {
-      console.log(error);
+      renderLoading("search");
+      renderError(error);
     });
 };
 

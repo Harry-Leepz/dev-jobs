@@ -6,6 +6,7 @@ import {
 
 import renderLoading from "./Loading.js";
 import renderJobDetails from "./JobDetails.js";
+import renderError from "./Error.js";
 
 const renderJobList = (jobListArray) => {
   jobListArray.slice(0, 7).forEach((jobItem) => {
@@ -59,11 +60,10 @@ const clickHandler = (event) => {
 
   // get the job item id and make fetch request
   const jobItemId = jobItemEl.children[0].getAttribute("href");
-  fetch(`${BASE_API_URL}/jobs?/${jobItemId}`)
+  fetch(`${BASE_API_URL}/adadd?/${jobItemId}`)
     .then((response) => {
       if (!response.ok) {
-        console.log("Something went wrong!");
-        return;
+        throw new Error("There seems to be a problem with the request!");
       }
       return response.json();
     })
@@ -73,7 +73,8 @@ const clickHandler = (event) => {
       renderJobDetails(jobItem);
     })
     .catch((error) => {
-      console.log(error);
+      renderLoading("job-details");
+      renderError(error);
     });
 };
 
