@@ -46,26 +46,6 @@ const submitHandler = async (event) => {
     renderLoading("search");
     renderError(error.message);
   }
-  // fetch(`${BASE_API_URL}/jobs?search=${searchText}`)
-  //   .then((response) => {
-  //     if (!response.ok) {
-  //       throw new Error("There seems to be a problem with the request!");
-  //     }
-  //     return response.json();
-  //   })
-  //   .then((data) => {
-  //     const { jobItems } = data;
-  //     console.log(jobItems);
-
-  //     // dom update
-  //     renderLoading("search");
-  //     numberEl.textContent = jobItems.length;
-  //     renderJobList(jobItems);
-  //   })
-  //   .catch((error) => {
-  //     renderLoading("search");
-  //     renderError(error);
-  //   });
 };
 
 searchFormEl.addEventListener("submit", submitHandler);
