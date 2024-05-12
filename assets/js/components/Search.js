@@ -10,7 +10,7 @@ import renderError from "./Error.js";
 import renderLoading from "./Loading.js";
 import renderJobList from "./JobList.js";
 
-const submitHandler = (event) => {
+const submitHandler = async (event) => {
   event.preventDefault();
 
   const searchText = searchInputEl.value.trim().toLowerCase();
@@ -29,26 +29,43 @@ const submitHandler = (event) => {
   jobListSearchEl.innerHTML = "";
 
   // fetch data
-  fetch(`${BASE_API_URL}/jobs?search=${searchText}`)
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error("There seems to be a problem with the request!");
-      }
-      return response.json();
-    })
-    .then((data) => {
-      const { jobItems } = data;
-      console.log(jobItems);
+  try {
+    const response = await fetch(`${BASE_API_URL}/jobs?search=${searchText}`);
+    const data = await response.json();
+    if (!response.ok) {
+      throw new Error(data.description);
+    }
 
-      // dom update
-      renderLoading("search");
-      numberEl.textContent = jobItems.length;
-      renderJobList(jobItems);
-    })
-    .catch((error) => {
-      renderLoading("search");
-      renderError(error);
-    });
+    const { jobItems } = data;
+
+    // dom updates
+    renderLoading("search");
+    numberEl.textContent = jobItems.length;
+    renderJobList(jobItems);
+  } catch (error) {
+    renderLoading("search");
+    renderError(error.message);
+  }
+  // fetch(`${BASE_API_URL}/jobs?search=${searchText}`)
+  //   .then((response) => {
+  //     if (!response.ok) {
+  //       throw new Error("There seems to be a problem with the request!");
+  //     }
+  //     return response.json();
+  //   })
+  //   .then((data) => {
+  //     const { jobItems } = data;
+  //     console.log(jobItems);
+
+  //     // dom update
+  //     renderLoading("search");
+  //     numberEl.textContent = jobItems.length;
+  //     renderJobList(jobItems);
+  //   })
+  //   .catch((error) => {
+  //     renderLoading("search");
+  //     renderError(error);
+  //   });
 };
 
 searchFormEl.addEventListener("submit", submitHandler);
