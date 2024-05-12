@@ -2,6 +2,7 @@ import {
   BASE_API_URL,
   jobDetailsContentEl,
   jobListSearchEl,
+  getData,
 } from "../common.js";
 
 import renderLoading from "./Loading.js";
@@ -61,11 +62,7 @@ const clickHandler = async (event) => {
   // get the job item id and make fetch request
   const jobItemId = jobItemEl.children[0].getAttribute("href");
   try {
-    const response = await fetch(`${BASE_API_URL}/jobs?/${jobItemId}`);
-    const data = await response.json();
-    if (!response.ok) {
-      throw new Error(data.description);
-    }
+    const data = await getData(`${BASE_API_URL}/jobs?/${jobItemId}`);
 
     const { jobItem } = data;
     // DOM updates
