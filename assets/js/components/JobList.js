@@ -44,7 +44,7 @@ const renderJobList = (jobListArray) => {
   });
 };
 
-const clickHandler = (event) => {
+const clickHandler = async (event) => {
   event.preventDefault();
 
   // get the clicked element and show visual indicator
@@ -60,22 +60,21 @@ const clickHandler = (event) => {
 
   // get the job item id and make fetch request
   const jobItemId = jobItemEl.children[0].getAttribute("href");
-  fetch(`${BASE_API_URL}/jobs?/${jobItemId}`)
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error("There seems to be a problem with the request!");
-      }
-      return response.json();
-    })
-    .then((data) => {
-      const { jobItem } = data;
-      renderLoading("job-listing");
-      renderJobDetails(jobItem);
-    })
-    .catch((error) => {
-      renderLoading("job-details");
-      renderError(error);
-    });
+  try {
+    const response = await fetch(`${BASE_API_URL}/jobs?/${jobItemId}`);
+    const data = await response.json();
+    if (!response.ok) {
+      throw new Error(data.description);
+    }
+
+    const { jobItem } = data;
+    // DOM updates
+    renderLoading("job-listing");
+    renderJobDetails(jobItem);
+  } catch (error) {
+    renderLoading("job-details");
+    renderError(error.message);
+  }
 };
 
 jobListSearchEl.addEventListener("click", clickHandler);
