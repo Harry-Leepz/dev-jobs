@@ -1,5 +1,6 @@
 import {
   BASE_API_URL,
+  state,
   jobDetailsContentEl,
   jobListSearchEl,
   getData,
@@ -9,8 +10,8 @@ import renderLoading from "./Loading.js";
 import renderJobDetails from "./JobDetails.js";
 import renderError from "./Error.js";
 
-const renderJobList = (jobListArray) => {
-  jobListArray.slice(0, 7).forEach((jobItem) => {
+const renderJobList = () => {
+  state.searchJobItems.slice(0, 7).forEach((jobItem) => {
     const {
       id,
       badgeLetters,
