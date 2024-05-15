@@ -11,6 +11,10 @@ import renderJobDetails from "./JobDetails.js";
 import renderError from "./Error.js";
 
 const renderJobList = () => {
+  // remove previous search job items
+  jobListSearchEl.innerHTML = "";
+
+  // display new search job items
   state.searchJobItems.slice(0, 7).forEach((jobItem) => {
     const {
       id,
