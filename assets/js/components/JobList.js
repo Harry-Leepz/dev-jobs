@@ -15,18 +15,20 @@ const renderJobList = () => {
   jobListSearchEl.innerHTML = "";
 
   // display new search job items
-  state.searchJobItems.slice(0, 7).forEach((jobItem) => {
-    const {
-      id,
-      badgeLetters,
-      title,
-      company,
-      duration,
-      salary,
-      location,
-      daysAgo,
-    } = jobItem;
-    const jobItemsHtml = `
+  state.searchJobItems
+    .slice(state.currentPage * 7 - 7, state.currentPage * 7)
+    .forEach((jobItem) => {
+      const {
+        id,
+        badgeLetters,
+        title,
+        company,
+        duration,
+        salary,
+        location,
+        daysAgo,
+      } = jobItem;
+      const jobItemsHtml = `
         <li class="job-item">
           <a class="job-item__link" href="${id}">
               <div class="job-item__badge">${badgeLetters}</div>
@@ -46,8 +48,8 @@ const renderJobList = () => {
           </a>
         </li>
   `;
-    jobListSearchEl.insertAdjacentHTML("beforeend", jobItemsHtml);
-  });
+      jobListSearchEl.insertAdjacentHTML("beforeend", jobItemsHtml);
+    });
 };
 
 const clickHandler = async (event) => {
