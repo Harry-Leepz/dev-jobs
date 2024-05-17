@@ -5,6 +5,7 @@ export const DEFAULT_DISPLAY_TIME = 3500;
 // PROJECT INTIAL STATE
 export const state = {
   searchJobItems: [],
+  currentPage: 1,
 };
 
 // HTML SELECTORS
