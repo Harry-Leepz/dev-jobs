@@ -1,6 +1,7 @@
 // CONSTANTS
 export const BASE_API_URL = "https://bytegrad.com/course-assets/js/2/api";
 export const DEFAULT_DISPLAY_TIME = 3500;
+export const DEFAULT_RESULTS_PER_PAGE = 7;
 
 // PROJECT INTIAL STATE
 export const state = {

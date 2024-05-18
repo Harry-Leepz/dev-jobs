@@ -1,4 +1,5 @@
 import {
+  DEFAULT_RESULTS_PER_PAGE,
   state,
   paginationEl,
   paginationBtnNextEl,
@@ -18,7 +19,11 @@ const renderPaginationButtons = () => {
   }
 
   // display the nexy pagination button if there are more job items to show on next page
-  if (state.searchJobItems.length - state.currentPage * 7 <= 0) {
+  if (
+    state.searchJobItems.length -
+      state.currentPage * DEFAULT_RESULTS_PER_PAGE <=
+    0
+  ) {
     paginationBtnNextEl.classList.add("pagination__button--hidden");
   } else {
     paginationBtnNextEl.classList.remove("pagination__button--hidden");

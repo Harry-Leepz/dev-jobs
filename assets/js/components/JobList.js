@@ -1,5 +1,6 @@
 import {
   BASE_API_URL,
+  DEFAULT_RESULTS_PER_PAGE,
   state,
   jobDetailsContentEl,
   jobListSearchEl,
@@ -16,7 +17,10 @@ const renderJobList = () => {
 
   // display new search job items
   state.searchJobItems
-    .slice(state.currentPage * 7 - 7, state.currentPage * 7)
+    .slice(
+      state.currentPage * DEFAULT_RESULTS_PER_PAGE - DEFAULT_RESULTS_PER_PAGE,
+      state.currentPage * DEFAULT_RESULTS_PER_PAGE
+    )
     .forEach((jobItem) => {
       const {
         id,
