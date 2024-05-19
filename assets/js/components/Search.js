@@ -6,11 +6,14 @@ import {
   jobListSearchEl,
   numberEl,
   getData,
+  sortingBtnRecentEl,
+  sortingBtnRelevantEl,
 } from "../common.js";
 
 import renderError from "./Error.js";
 import renderLoading from "./Loading.js";
 import renderJobList from "./JobList.js";
+import renderPaginationButtons from "./Pagination.js";
 
 const submitHandler = async (event) => {
   event.preventDefault();
@@ -30,16 +33,22 @@ const submitHandler = async (event) => {
   renderLoading("search");
   jobListSearchEl.innerHTML = "";
 
+  // reset sorting to relevnancy
+  sortingBtnRecentEl.classList.remove("sorting__button--active");
+  sortingBtnRelevantEl.classList.add("sorting__button--active");
+
   // fetch data
   try {
     const data = await getData(`${BASE_API_URL}/jobs?search=${searchText}`);
 
     const { jobItems } = data;
     state.searchJobItems = jobItems;
+    state.currentPage = 1;
 
     // dom updates
     renderLoading("search");
     numberEl.textContent = jobItems.length;
+    renderPaginationButtons();
     renderJobList();
   } catch (error) {
     renderLoading("search");
