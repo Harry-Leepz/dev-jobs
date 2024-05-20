@@ -6,6 +6,7 @@ export const DEFAULT_RESULTS_PER_PAGE = 7;
 // PROJECT INTIAL STATE
 export const state = {
   searchJobItems: [],
+  activeJobItem: {},
   currentPage: 1,
 };
 
