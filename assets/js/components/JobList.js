@@ -74,9 +74,14 @@ const clickHandler = async (event) => {
 
   // get the clicked element and show visual indicator
   const jobItemEl = event.target.closest(".job-item");
+
+  // remove active class for all other job items
   document
-    .querySelector(".job-item--active")
-    ?.classList.remove("job-item--active");
+    .querySelectorAll(".job-item--active")
+    .forEach((jobItemWithActiveClass) =>
+      jobItemWithActiveClass.classList.remove("job-item--active")
+    );
+
   jobItemEl.classList.add("job-item--active");
 
   // clear job details and show loading element
