@@ -4,6 +4,7 @@ import {
   state,
   jobDetailsContentEl,
   jobListSearchEl,
+  jobListBookmarksEl,
   getData,
 } from "../common.js";
 
@@ -11,28 +12,38 @@ import renderLoading from "./Loading.js";
 import renderJobDetails from "./JobDetails.js";
 import renderError from "./Error.js";
 
-const renderJobList = () => {
-  // remove previous search job items
-  jobListSearchEl.innerHTML = "";
+const renderJobList = (whichJobList = "search") => {
+  // determine selector for job list rendering (search job list or bookmarks job list)
+  const jobListEl =
+    whichJobList === "search" ? jobListSearchEl : jobListBookmarksEl;
 
-  // display new search job items
-  state.searchJobItems
-    .slice(
+  // remove previous search job items
+  jobListEl.innerHTML = "";
+
+  // determine which job list should be rendered
+  let jobItems;
+  if (whichJobList === "search") {
+    jobItems = state.searchJobItems.slice(
       state.currentPage * DEFAULT_RESULTS_PER_PAGE - DEFAULT_RESULTS_PER_PAGE,
       state.currentPage * DEFAULT_RESULTS_PER_PAGE
-    )
-    .forEach((jobItem) => {
-      const {
-        id,
-        badgeLetters,
-        title,
-        company,
-        duration,
-        salary,
-        location,
-        daysAgo,
-      } = jobItem;
-      const jobItemsHtml = `
+    );
+  } else if (whichJobList === "bookmarks") {
+    jobItems = state.bookmarksJobItems;
+  }
+
+  // display new search job items
+  jobItems.forEach((jobItem) => {
+    const {
+      id,
+      badgeLetters,
+      title,
+      company,
+      duration,
+      salary,
+      location,
+      daysAgo,
+    } = jobItem;
+    const jobItemsHtml = `
         <li class="job-item ${
           state.activeJobItem.id === id ? "job-item--active" : ""
         }">
@@ -53,9 +64,9 @@ const renderJobList = () => {
               </div>
           </a>
         </li>
-  `;
-      jobListSearchEl.insertAdjacentHTML("beforeend", jobItemsHtml);
-    });
+      `;
+    jobListEl.insertAdjacentHTML("beforeend", jobItemsHtml);
+  });
 };
 
 const clickHandler = async (event) => {
@@ -97,5 +108,6 @@ const clickHandler = async (event) => {
 };
 
 jobListSearchEl.addEventListener("click", clickHandler);
+jobListBookmarksEl.addEventListener("click", clickHandler);
 
 export default renderJobList;
