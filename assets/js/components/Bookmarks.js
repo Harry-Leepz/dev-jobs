@@ -11,8 +11,20 @@ const clickHandler = (event) => {
   // check if the element clicked is outside the bookmarks button
   if (!event.target.className.includes("bookmark")) return;
 
-  // update state by adding the jobitem to the bookmarks array
-  state.bookmarksJobItems.push(state.activeJobItem);
+  // determine if the job item already exists in the bookmarks list,
+  // if so the remove it, else add it to the list
+  if (
+    state.bookmarksJobItems.some(
+      (jobItem) => jobItem.id === state.activeJobItem.id
+    )
+  ) {
+    state.bookmarksJobItems = state.bookmarksJobItems.filter(
+      (bookmarkJobItem) => bookmarkJobItem.id !== state.activeJobItem.id
+    );
+  } else {
+    // update state by adding the jobitem to the bookmarks array
+    state.bookmarksJobItems.push(state.activeJobItem);
+  }
 
   // update bookmarks icon styling
   document
