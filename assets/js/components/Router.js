@@ -1,4 +1,9 @@
-import { BASE_API_URL, getData, jobDetailsContentEl } from "../common.js";
+import {
+  BASE_API_URL,
+  state,
+  getData,
+  jobDetailsContentEl,
+} from "../common.js";
 
 import renderLoading from "./Loading.js";
 import renderJobDetails from "./JobDetails.js";
@@ -19,6 +24,10 @@ const loadHashChangeHandler = async () => {
       const data = await getData(`${BASE_API_URL}/jobs?/${id}`);
 
       const { jobItem } = data;
+
+      // updating the state
+      state.activeJobItem = jobItem;
+
       // DOM updates
       renderLoading("job-details");
       renderJobDetails(jobItem);

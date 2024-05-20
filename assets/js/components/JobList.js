@@ -33,7 +33,9 @@ const renderJobList = () => {
         daysAgo,
       } = jobItem;
       const jobItemsHtml = `
-        <li class="job-item">
+        <li class="job-item ${
+          state.activeJobItem.id === id ? "job-item--active" : ""
+        }">
           <a class="job-item__link" href="${id}">
               <div class="job-item__badge">${badgeLetters}</div>
               <div class="job-item__middle">
@@ -72,6 +74,11 @@ const clickHandler = async (event) => {
 
   // get the job item id and make fetch request
   const jobItemId = jobItemEl.children[0].getAttribute("href");
+
+  // update the state for active job item
+  state.activeJobItem = state.searchJobItems.find(
+    (jobItem) => jobItem.id === +jobItemId
+  );
 
   // add id to URL
   history.pushState(null, "", `/#${jobItemId}`);
