@@ -92,7 +92,8 @@ const clickHandler = async (event) => {
   const jobItemId = jobItemEl.children[0].getAttribute("href");
 
   // update the state for active job item
-  state.activeJobItem = state.searchJobItems.find(
+  const allJobItems = [...state.bookmarksJobItems, ...state.searchJobItems];
+  state.activeJobItem = allJobItems.find(
     (jobItem) => jobItem.id === +jobItemId
   );
 
