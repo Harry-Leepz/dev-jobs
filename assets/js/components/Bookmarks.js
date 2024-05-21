@@ -26,6 +26,12 @@ const clickHandler = (event) => {
     state.bookmarksJobItems.push(state.activeJobItem);
   }
 
+  // persist data with local storage
+  localStorage.setItem(
+    "bookmarkJobItems",
+    JSON.stringify(state.bookmarksJobItems)
+  );
+
   // update bookmarks icon styling
   document
     .querySelector(".job-info__bookmark-icon")
