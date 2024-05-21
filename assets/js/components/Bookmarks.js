@@ -36,8 +36,6 @@ const clickHandler = (event) => {
   document
     .querySelector(".job-info__bookmark-icon")
     .classList.toggle("job-info__bookmark-icon--bookmarked");
-
-  renderJobList("bookmarks");
 };
 
 const mouseEnterHandler = (event) => {
@@ -46,6 +44,7 @@ const mouseEnterHandler = (event) => {
 
   // make job list visible
   jobListBookmarksEl.classList.add("job-list--visible");
+  renderJobList("bookmarks");
 };
 
 const mouseLeaveHandler = () => {
