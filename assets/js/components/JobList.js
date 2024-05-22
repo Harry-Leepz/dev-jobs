@@ -86,8 +86,6 @@ const clickHandler = async (event) => {
       jobItemWithActiveClass.classList.remove("job-item--active")
     );
 
-  jobItemEl.classList.add("job-item--active");
-
   // clear job details and show loading element
   jobDetailsContentEl.innerHTML = "";
   renderLoading("job-listing");
@@ -100,6 +98,8 @@ const clickHandler = async (event) => {
   state.activeJobItem = allJobItems.find(
     (jobItem) => jobItem.id === +jobItemId
   );
+
+  renderJobList();
 
   // add id to URL
   history.pushState(null, "", `/#${jobItemId}`);

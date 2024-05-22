@@ -8,6 +8,7 @@ import {
 import renderLoading from "./Loading.js";
 import renderJobDetails from "./JobDetails.js";
 import renderError from "./Error.js";
+import renderJobList from "./JobList.js";
 
 const loadHashChangeHandler = async () => {
   // get the job item id from url and remove the hash from the start
@@ -16,6 +17,13 @@ const loadHashChangeHandler = async () => {
   if (id) {
     // remove previous job details content
     jobDetailsContentEl.innerHTML = "";
+
+    // remove active class for all other job items
+    document
+      .querySelectorAll(".job-item--active")
+      .forEach((jobItemWithActiveClass) =>
+        jobItemWithActiveClass.classList.remove("job-item--active")
+      );
 
     // show loading spinner
     renderLoading("job-details");
@@ -27,6 +35,7 @@ const loadHashChangeHandler = async () => {
 
       // updating the state
       state.activeJobItem = jobItem;
+      renderJobList();
 
       // DOM updates
       renderLoading("job-details");
